@@ -14,6 +14,8 @@ spec:
     warn: false
   sourceRepos:
     - '*'
+  syncPolicy:
+    automated: {}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -31,6 +33,8 @@ spec:
     warn: false
   sourceRepos:
     - '*'
+  syncPolicy:
+    automated: {}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
@@ -48,6 +52,8 @@ spec:
     warn: false
   sourceRepos:
     - '*'
+  syncPolicy:
+    automated: {}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -62,6 +68,8 @@ spec:
   destination:
     server: 'https://172.29.47.116:57830'
     namespace: prod
+  syncPolicy:
+    automated: {}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -76,6 +84,8 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: dev
+  syncPolicy:
+    automated: {}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -90,3 +100,5 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: dev
+  syncPolicy:
+    automated: {}
