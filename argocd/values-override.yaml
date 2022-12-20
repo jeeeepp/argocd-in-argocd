@@ -26,7 +26,7 @@ server:
           valueFiles:
           - values-test.yaml
           - values-override.yaml
-        path: argocd/
+        path: argocd
         repoURL: https://github.com/jeeeepp/argocd-in-argocd.git
         targetRevision: HEAD
       syncPolicy:
