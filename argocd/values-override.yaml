@@ -6,35 +6,7 @@ server:
   ## ArgoCD config
   ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
   configEnabled: true
-  config:
-    repositories: |
-      - type: git
-        url: https://github.com/jeeeepp/argocd-in-argocd.git
-      - name: argo-helm
-        type: helm
-        url: https://argoproj.github.io/argo-helm
-      - name: argocd-example
-        type: git
-        url: https://github.com/jeeeepp/argocd-example.git
-  additionalApplications: 
-    - name: argocd
-      namespace: argocd
-      destination:
-        namespace: argocd
-        server: https://kubernetes.default.svc
-      project: argocd
-      source:
-        helm:
-          version: v3
-          valueFiles:
-          - values-test.yaml
-          - values-override.yaml
-        path: argocd
-        repoURL: https://github.com/jeeeepp/argocd-in-argocd.git
-        targetRevision: HEAD
-      syncPolicy:
-        syncOptions:
-        - CreateNamespace=true
+  additionalApplications:
     - name: argocd-apps
       namespace: argocd
       destination:
@@ -43,23 +15,6 @@ server:
       project: argocd
       source:
         path: argocd-apps
-        repoURL: https://github.com/jeeeepp/argocd-in-argocd.git
-        targetRevision: HEAD
-        directory:
-          recurse: true
-          jsonnet: {}
-      syncPolicy:
-        automated:
-          selfHeal: true
-          prune: true
-    - name: argocd-appprojects
-      namespace: argocd
-      destination:
-        namespace: argocd
-        server: https://kubernetes.default.svc
-      project: argocd
-      source:
-        path: argocd-appprojects
         repoURL: https://github.com/jeeeepp/argocd-in-argocd.git
         targetRevision: HEAD
         directory:
