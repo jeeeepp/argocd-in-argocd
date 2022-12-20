@@ -13,6 +13,9 @@ server:
       - name: argo-helm
         type: helm
         url: https://argoproj.github.io/argo-helm
+      - name: argocd-example
+        type: git
+        url: https://github.com/jeeeepp/argocd-example.git
   additionalApplications: 
     - name: argocd
       namespace: argocd
