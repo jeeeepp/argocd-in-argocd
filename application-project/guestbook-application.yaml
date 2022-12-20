@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-116
+spec:
+  project: production
+  source:
+    repoURL: 'https://github.com/jeeeepp/argocd-example.git'
+    path: helm-guestbook
+    targetRevision: HEAD
+  destination:
+    server: 'https://172.29.47.116:57830'
+    namespace: prod

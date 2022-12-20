@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-in-cluster
+spec:
+  project: develop
+  source:
+    repoURL: 'https://github.com/jeeeepp/argocd-example.git'
+    path: helm-guestbook/
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev
