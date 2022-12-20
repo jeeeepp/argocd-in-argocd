@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: production
+  name: production-1
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -18,7 +18,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: develop
+  name: develop-1
   namespace: argocd
 spec:
   clusterResourceWhitelist:
@@ -35,7 +35,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: sample-project
+  name: sample-project-1
   namespace: argocd
 spec:
   clusterResourceWhitelist:
