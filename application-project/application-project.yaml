@@ -52,7 +52,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: test-116
+  name: stack-test-116
 spec:
   project: production
   source:
@@ -66,7 +66,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: test-in-cluster
+  name: stack-test-in-cluster
 spec:
   project: develop
   source:
@@ -80,7 +80,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sample-test-in-cluster
+  name: stack-sample-in-cluster
 spec:
   project: develop
   source:
