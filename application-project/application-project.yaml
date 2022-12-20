@@ -1,0 +1,92 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: production
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  orphanedResources:
+    warn: false
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: develop
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  orphanedResources:
+    warn: false
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sample-project
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  orphanedResources:
+    warn: false
+  sourceRepos:
+    - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-116
+spec:
+  project: production
+  source:
+    repoURL: 'https://github.com/jeeeepp/argocd-example.git'
+    path: helm-guestbook
+    targetRevision: HEAD
+  destination:
+    server: 'https://172.29.47.116:57830'
+    namespace: prod
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-in-cluster
+spec:
+  project: develop
+  source:
+    repoURL: 'https://github.com/jeeeepp/argocd-example.git'
+    path: helm-guestbook
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-test-in-cluster
+spec:
+  project: develop
+  source:
+    repoURL: 'https://github.com/jeeeepp/argocd-example.git'
+    path: helm-guestbook/
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev
