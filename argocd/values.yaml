@@ -106,6 +106,9 @@ configs:
   cm:
     # -- Create the argocd-cm configmap for [declarative setup]
     create: true
+    accounts.developer: "apiKey, login"
+    accounts.lead: "apiKey, login"
+    accounts.readOnly: "apiKey, login"
 
     # -- Annotations to be added to argocd-cm configmap
     annotations: {}
@@ -123,7 +126,7 @@ configs:
 
     # -- Enable exec feature in Argo UI
     ## Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/rbac/#exec-resource
-    exec.enabled: false
+    exec.enabled: true
 
     # -- Enable local admin user
     ## Ref: https://argo-cd.readthedocs.io/en/latest/faq/#how-to-disable-admin-user
@@ -211,12 +214,43 @@ configs:
 
     # -- The name of the default role which Argo CD will falls back to, when authorizing API requests (optional).
     # If omitted or empty, users may be still be able to login, but will see no apps, projects, etc...
-    policy.default: 'role:admin'
+    policy.default: 'role:readonly'
 
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
     policy.csv: |
+      p, role:lead, applications, create, */*, allow
+      p, role:lead, applications, update, */*, allow
+      p, role:lead, applications, delete, */*, allow
+      p, role:lead, applications, sync, */*, allow
+      p, role:lead, applications, override, */*, allow
+      p, role:lead, applications, action/*, */*, allow
+      p, role:lead, exec, create, */*, allow
+      p, role:lead, applications, create, default/*, deny
+      p, role:lead, applications, update, default*/*, deny
+      p, role:lead, applications, delete, default/*, deny
+      p, role:lead, applications, sync, default/*, deny
+      p, role:lead, applications, override, default/*, deny
+      p, role:lead, applications, action/*, default/*, deny
+
+      p, role:developer, applications, get, */*, allow
+      p, role:developer, exec, create, develop/*, allow
+      p, role:developer, applications, create, develop/*, allow
+      p, role:developer, applications, update, develop/*, allow
+      p, role:developer, applications, delete, develop/*, allow
+      p, role:developer, applications, sync, develop/*, allow
+      p, role:developer, applications, override, develop/*, allow
+      p, role:developer, applications, action/*, develop/*, allow
+      p, role:developer, applications, create, default/*, deny
+      p, role:developer, applications, update, default*/*, deny
+      p, role:developer, applications, delete, default/*, deny
+      p, role:developer, applications, sync, default/*, deny
+      p, role:developer, applications, override, default/*, deny
+      p, role:ledeveloperad, applications, action/*, default/*, deny
+
+      g, developer, role:developer
       g, admins, role:admin
+      g, lead, role:lead
 
     # Policy rules are in the form:
     #  p, subject, resource, action, object, effect
